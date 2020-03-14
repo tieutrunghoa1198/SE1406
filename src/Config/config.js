@@ -15,5 +15,5 @@ export default {
             'Content-Type': 'application/x-www-form-urlencoded'
         }
     },
-    rootAPI:  'http://localhost:8000' 
+    rootAPI:  'http://localhost:8080/api_voicebot' 
 }

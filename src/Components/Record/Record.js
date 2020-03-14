@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import ReactRecord from 'react-record'
 import axiosStt from '../../Config/axiosStt'
+import axiosLocal from '../../Config/axiosLocal'
+import axiosTts from '../../Config/axiosTts'
 export default class Record extends Component {
     constructor(props) {
         super(props);
@@ -34,17 +36,43 @@ export default class Record extends Component {
     */
 
     speechToText = (blob) => {
-        let responseText
+        let question
         axiosStt
             .post('', blob)
             .then(response => {
-                responseText = response.data.hypotheses[0].utterance
-                console.log("Speech to text: ", responseText)
-                // this.setText(responseText)
-                // this.requestTo_VoiceBot(responseText)
+                question = response.data.hypotheses[0].utterance
+                console.log("Speech to text: ", question)
+                this.askBot(question)
             }).catch(err => {
                 console.log('Request to FPT error: ', err);
                 console.log(process.env)
+            })
+    }
+
+    askBot = (question) => {
+        let answer
+        axiosLocal
+            .post('/answer', {
+                question: question
+            })
+            .then(res => {
+                answer = res.data
+                console.log('Success: ', res.data)
+                this.textToSpeech(answer)
+            }).catch(err => {
+                console.log('Bot don\'t understand what you say: ', err);
+            })
+    }
+
+    textToSpeech = (tts) => {
+        let urlResponse
+        axiosTts
+            .post('', tts)
+            .then(response => {
+                urlResponse = response.data.async
+                console.log(urlResponse)
+            }).catch(err => {
+                console.log('Text to speech error: ', err);
             })
     }
 

@@ -24,7 +24,7 @@ export default function Footer() {
 
                 <h6 className="pt-3 text-light text-center text-capitalize">
                     let's be friends
-            </h6>
+                </h6>
 
                 <ul className="list-inline text-center">
                     <li className="list-inline-item mx-2">
