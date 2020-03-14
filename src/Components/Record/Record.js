@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ReactRecord from 'react-record'
+import axiosStt from '../../Config/axiosStt'
 export default class Record extends Component {
     constructor(props) {
         super(props);
@@ -26,13 +27,25 @@ export default class Record extends Component {
         this.setState({
             blobURL: blobObject.blobURL
         });
+        this.speechToText(blobObject.blob)
     }
     /*
         interact with fpt.ai and local api
     */
 
     speechToText = (blob) => {
-
+        let responseText
+        axiosStt
+            .post('', blob)
+            .then(response => {
+                responseText = response.data.hypotheses[0].utterance
+                console.log("Speech to text: ", responseText)
+                // this.setText(responseText)
+                // this.requestTo_VoiceBot(responseText)
+            }).catch(err => {
+                console.log('Request to FPT error: ', err);
+                console.log(process.env)
+            })
     }
 
     render() {
@@ -56,10 +69,10 @@ export default class Record extends Component {
                     </div>
                     <button className="btn btn-primary mr-2" onClick={this.startRecording} type="button">
                         Start
-              </button>
+                    </button>
                     <button className="btn btn-danger ml-2" onClick={this.stopRecording} type="button">
                         Stop
-              </button>
+                    </button>
                 </ReactRecord>
             </div>
         );
