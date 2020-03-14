@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+
+@media (min-width: 1140px) {
+  .container-fluid {
+      max-width: 1140px;
+  }
+  /* .d-block {
+      height: 32.5rem;
+      object-fit: cover;
+  } */
+}
