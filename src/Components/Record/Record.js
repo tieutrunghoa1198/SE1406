@@ -10,6 +10,7 @@ export default class Record extends Component {
             blobURL: null,
             isRecording: false
         }
+        this.audio = new Audio()
     }
 
     startRecording = () => {
@@ -71,9 +72,27 @@ export default class Record extends Component {
             .then(response => {
                 urlResponse = response.data.async
                 console.log(urlResponse)
+                this.waitLinkAvailable(urlResponse, 3000)
             }).catch(err => {
                 console.log('Text to speech error: ', err);
             })
+    }
+
+    waitLinkAvailable = (url, timeout) => {
+        /*
+            Lỗi:  DOMException: The play() request was interrupted by a call to pause()
+        */
+        let { audio } = this
+        console.log('start')
+        setTimeout(() => {
+            audio.src = url
+            audio.play().then(() => {
+                console.log('Ready status: ', audio.readyState)
+            }).catch(err => {
+                console.log('Ready status: ', audio.readyState)
+                console.log('Lỗi: ', err)
+            })
+        }, timeout);
     }
 
     render() {
