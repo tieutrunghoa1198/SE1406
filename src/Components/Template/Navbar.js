@@ -4,7 +4,10 @@ export default function Navbar() {
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="container-fluid">
-                <a className="navbar-brand" href="/">SE1406</a>
+                <a className="navbar-brand" href="/">
+                    <img className="mr-2" src="https://st.chungta.vn/v306/chungta/images/graphics/logofpt.fw.png" alt="logo" />
+                    SE1406
+                </a>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>

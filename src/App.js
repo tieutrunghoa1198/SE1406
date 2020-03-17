@@ -5,11 +5,11 @@ import Footer from './Components/Template/Footer'
 import Slider from './Components/Template/Slide'
 function App() {
   return (
-    <div className="App">
+    <>
       <Navbar />
-      <Slider/>
+      <Slider />
       <Footer />
-      </div>
+    </>
   );
 }
 

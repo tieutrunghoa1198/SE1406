@@ -37,15 +37,14 @@
   }
 }
 
-@media (min-width: 1140px) {
+ @media (min-width: 1140px) {
   .container-fluid {
       max-width: 1140px;
   }
-  /* .d-block {
-      height: 32.5rem;
-      object-fit: cover;
-  } */
 }
+  
+ 
+
 
 .slider_bg_1 {
   background-image: url(../src/Components/Template/img/banner.png);
