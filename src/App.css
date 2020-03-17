@@ -46,3 +46,7 @@
       object-fit: cover;
   } */
 }
+
+.slider_bg_1 {
+  background-image: url(../src/Components/Template/img/banner.png);
+}

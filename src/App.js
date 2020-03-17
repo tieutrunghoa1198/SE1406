@@ -2,16 +2,14 @@ import React from 'react';
 import './App.css';
 import Navbar from './Components/Template/Navbar'
 import Footer from './Components/Template/Footer'
-import Record from './Components/Record/Record'
+import Slider from './Components/Template/Slide'
 function App() {
   return (
-    <>
+    <div className="App">
       <Navbar />
-      <div className="container-fluid text-center">
-        <Record />
-      </div>
+      <Slider/>
       <Footer />
-    </>
+      </div>
   );
 }
 

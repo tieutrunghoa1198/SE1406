@@ -103,21 +103,10 @@ export default class Record extends Component {
                     record={isRecording}
                     onStop={this.onStop}
                 >
-                    <div>
-                        <audio
-                            ref={c => {
-                                this.audioSource = c;
-                            }}
-                            controls="controls"
-                            src={this.state.blobURL}
-                        >
-                            <track kind="captions" />
-                        </audio>
-                    </div>
-                    <button className="btn btn-primary mr-2" onClick={this.startRecording} type="button">
+                    <button className="boxed-btn3 mx-2" onClick={this.startRecording} type="button">
                         Start
                     </button>
-                    <button className="btn btn-danger ml-2" onClick={this.stopRecording} type="button">
+                    <button className="boxed-btn3 ml-2" onClick={this.stopRecording} type="button">
                         Stop
                     </button>
                 </ReactRecord>
