@@ -6,7 +6,7 @@ export default class Slide extends Component {
         return (
             <div class="slider_area">
                 <div class="single_slider  d-flex align-items-center slider_bg_1 overlay">
-                    <div class="container">
+                    <div class="container-fluid">
                         <div class="row justify-content-start">
                             <div class="col-lg-10 col-md-10">
                                 <div class="slider_text">

@@ -10,7 +10,7 @@ function App() {
     <Router>
       <Navbar />
       <Route exact path="/" component={Slider} />
-      <Route exact path="/about" component={About} />
+      <Route path="/about" component={About} />
       <Footer />
     </Router>
   );
