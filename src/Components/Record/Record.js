@@ -7,7 +7,8 @@ export default class Record extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            blobURL: null,
+            loading: false,
+            transcript: '',
             isRecording: false
         }
         this.audio = new Audio()
@@ -27,14 +28,17 @@ export default class Record extends Component {
 
     onStop = blobObject => {
         console.log('blobObject is: ', blobObject);
-        this.setState({
-            blobURL: blobObject.blobURL
-        });
         this.speechToText(blobObject.blob)
     }
     /*
         interact with fpt.ai and local api
     */
+
+    setText = (responseText) => {
+        this.setState({
+            transcript: responseText
+        })
+    }
 
     speechToText = (blob) => {
         let question
@@ -59,6 +63,7 @@ export default class Record extends Component {
             .then(res => {
                 answer = res.data
                 console.log('Success: ', res.data)
+                this.setText(res.data)
                 this.textToSpeech(answer)
             }).catch(err => {
                 console.log('Bot don\'t understand what you say: ', err);
@@ -109,6 +114,7 @@ export default class Record extends Component {
                     <button className="boxed-btn3 ml-2" onClick={this.stopRecording} type="button">
                         Stop
                     </button>
+
                 </ReactRecord>
             </div>
         );
