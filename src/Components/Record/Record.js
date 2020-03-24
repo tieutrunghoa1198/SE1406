@@ -3,6 +3,7 @@ import ReactRecord from 'react-record'
 import axiosStt from '../../Config/axiosStt'
 import axiosLocal from '../../Config/axiosLocal'
 import axiosTts from '../../Config/axiosTts'
+import { ClipLoader } from "react-spinners"
 export default class Record extends Component {
     constructor(props) {
         super(props);
@@ -14,6 +15,12 @@ export default class Record extends Component {
         this.audio = new Audio()
     }
 
+    isLoading = (boolean) => {
+        this.setState({
+            isLoading: boolean
+        })
+    }
+
     startRecording = () => {
         this.setState({
             isRecording: true
@@ -21,6 +28,7 @@ export default class Record extends Component {
     }
 
     stopRecording = () => {
+        if (this.state.isRecording !== false) this.isLoading(true)
         this.setState({
             isRecording: false
         });
@@ -56,6 +64,7 @@ export default class Record extends Component {
 
     askBot = (question) => {
         let answer
+        this.isLoading(true)
         axiosLocal
             .post('/answer', {
                 question: question
@@ -92,6 +101,7 @@ export default class Record extends Component {
         setTimeout(() => {
             audio.src = url
             audio.play().then(() => {
+                this.isLoading(false)
                 console.log('Ready status: ', audio.readyState)
             }).catch(err => {
                 console.log('Ready status: ', audio.readyState)
@@ -101,7 +111,7 @@ export default class Record extends Component {
     }
 
     render() {
-        const { isRecording } = this.state;
+        const { isRecording, isLoading, transcript } = this.state;
         return (
             <div className="record-mic">
                 <ReactRecord
@@ -114,7 +124,11 @@ export default class Record extends Component {
                     <button className="boxed-btn3 ml-2" onClick={this.stopRecording} type="button">
                         Stop
                     </button>
-
+                    <div className="d-flex justify-content-start my-3">
+                        <p className="display-4 text-light mt-3 mx-3">
+                            {isLoading ? <ClipLoader color={"white"} /> : transcript}
+                        </p>
+                    </div>
                 </ReactRecord>
             </div>
         );
